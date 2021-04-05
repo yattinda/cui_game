@@ -97,7 +97,7 @@ int checkClear(int gridNum, int mineNum){
 }
 
 void open(int x, int y, int gridNum){
-  if(x < 1 || x > gridNum - 2 || y < 1 || y > gridnum -2){
+  if(x < 1 || x > gridNum || y < 1 || y > gridnum){
     return ;
   } else if (grid[y][x] != -1){
     return ;
