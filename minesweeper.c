@@ -70,6 +70,8 @@ void printBoard(int gridNum){
         printf("■");
       } else if (grid[y][x] == 0){
         printf("・");
+      } else if (grid[y][x] < -1){
+        printf("＊")
       } else {
         printf("%i", grid[y][x]);
       }
