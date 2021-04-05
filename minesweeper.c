@@ -58,20 +58,20 @@ void setBoard(int gridNum, int mineNum) {
 
 void printBoard(int gridNum){
   printf("\n  ");
-  for(int i = 1; i <= gridNum - 2; i++){
+  for(int i = 1; i <= gridNum; i++){
     printf("%i ", gridNum);
   }
   printf("\n");
 
-  for (int y = 1; y <= gridNum - 2; y++){
+  for (int y = 1; y <= gridNum; y++){
     printf("%i ", gridNum);
-    for (int x = 1; x <= gridNum - 2; x++){
+    for (int x = 1; x <= gridNum; x++){
       if (grid[y][x] == -1) {
         printf("■");
       } else if (grid[y][x] == 0){
         printf("・");
       } else if (grid[y][x] < -1){
-        printf("＊")
+        printf("＊");
       } else {
         printf("%i", grid[y][x]);
       }
@@ -81,7 +81,22 @@ void printBoard(int gridNum){
   }
 }
 
-void open(int x, int y){
+int checkClear(int gridNum, int mineNum){
+  int count = 0;
+  for (int y = 1; y < gridNum; y++){
+    for (int x = 1; x < gridNum; x++){
+      if(grid[y][x] > -1){
+        count++;
+      }
+    }
+  }
+  if (count == gridNum * gridNum - mineNum){
+    return 500;
+  }
+  return -500;
+}
+
+void open(int x, int y, int gridNum){
   if(x < 1 || x > gridNum - 2 || y < 1 || y > gridnum -2){
     return ;
   } else if (grid[y][x] != -1){
