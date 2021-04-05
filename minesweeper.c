@@ -41,9 +41,9 @@ void setBoard(int gridNum, int mineNum) {
       p = rand() % mineNum + 1;
       q = rand() % mineNum + 1;
     }
-    while(grid[q][p] != -2);
+    while(grid[q][p] > -2);
 
-      grid[q][p] = -2;
+      grid[q][p] = -100;
 
       grid[q][p + 1] += 1;
       grid[q][p - 1] += 1;
