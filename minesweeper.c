@@ -14,7 +14,7 @@ int difficult (int difficulty){
     gridNum = 3;
     mineNum = 1;
   }
-  return gridNum, mineNum
+  return gridNum, mineNum;
 }
 
 // int **grid = (int**)malloc(gridNum*sizeof(int*));
