@@ -80,3 +80,20 @@ void printBoard(int gridNum){
   printf("\n");
   }
 }
+
+void open(int x, int y){
+  if(x < 1 || x > gridNum - 2 || y < 1 || y > gridnum -2){
+    return ;
+  } else if (grid[y][x] != -1){
+    return ;
+  } else {
+    open(x, y - 1);
+    open(x - 1, y - 1);
+    open(x - 1, y);
+    open(x - 1, y + 1);
+    open(x, y + 1);
+    open(x + 1, y + 1);
+    open(x + 1, y);
+    open(x + 1, y - 1);
+  }
+}
