@@ -124,6 +124,5 @@ int main(){
     printf("Please enter the level at number\n1: EASY\n2: HIGH\n")
     scanf("%i", l);
     difficult(l);
-    setBoard(gridNum, mineNum);;
   }
 }
