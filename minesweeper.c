@@ -115,3 +115,15 @@ void open(int x, int y, int gridNum){
     open(x + 1, y - 1);
   }
 }
+
+int main(){
+  printf("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-\n");
+  printf("   Hello this is MineSweeper\n");
+  printf("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-\n");
+  for(;;){
+    printf("Please enter the level at number\n1: EASY\n2: HIGH\n")
+    scanf("%i", l);
+    difficult(l);
+    setBoard(gridNum, mineNum);;
+  }
+}
