@@ -2,27 +2,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-int difficult (int difficulty){
-  int gridNum, mineNum;
-  if (difficulty == 99){
-    gridNum = 9;
-    mineNum = 9;
-  } else if (difficulty == 100){
-    gridNum = 16;
-    mineNum = 40;
-  } else {
-    gridNum = 3;
-    mineNum = 1;
-  }
-  return gridNum, mineNum;
-}
-
-// int **grid = (int**)malloc(gridNum*sizeof(int*));
-//
-// for(int i = 0; i < gridNum; i++){
-//     grid[i]=(int*)malloc(gridNum*sizeof(int));
-// }
-
 void setBoard(int gridNum, int mineNum) {
   int **grid = (int**)malloc(gridNum*sizeof(int*));
 
@@ -99,7 +78,7 @@ int checkClear(int gridNum, int mineNum){
   return -500;
 }
 
-void open(int x, int y, int gridNum){
+void open(int x, int y){
   if(x < 1 || x > gridNum || y < 1 || y > gridNum){
     return ;
   } else if (grid[y][x] != -1){
@@ -117,12 +96,25 @@ void open(int x, int y, int gridNum){
 }
 
 int main(){
+  int l, gridNum, mineNum;;
   printf("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-\n");
   printf("   Hello this is MineSweeper\n");
   printf("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-\n");
   for(;;){
-    printf("Please enter the level at number\n1: EASY\n2: HIGH\n")
-    scanf("%i", l);
-    difficult(l);
+    printf("Please enter the level at number\n1: EASY\n2: HIGH\n");
+    scanf("%i", &l);
+    if (l == 1){
+      gridNum = 9;
+      mineNum = 9;
+    } else if (l == 2){
+      gridNum = 16;
+      mineNum = 40;
+    } else {
+      printf("Please enter 1 or 2\n");
+      break;
+    }
+    while(checkClear(gridNum, mineNum) == -500){
+      printBoard(gridNum);
+    }
   }
 }
