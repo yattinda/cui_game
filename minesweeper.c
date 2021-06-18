@@ -38,7 +38,7 @@ void setBoard(int gridNum, int mineNum) {
   }
 }
 
-void printBoard(int gridNum){
+void printBoard(int gridNum, int grid[][]){
   printf("\n  ");
   for(int i = 1; i <= gridNum; i++){
     printf("%i ", gridNum);
@@ -78,7 +78,7 @@ int checkClear(int gridNum, int mineNum){
   return -500;
 }
 
-void open(int x, int y){
+void open(int x, int y, int gridnum){
   if(x < 1 || x > gridNum || y < 1 || y > gridNum){
     return ;
   } else if (grid[y][x] != -1){
