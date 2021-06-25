@@ -1,33 +1,37 @@
 import random
+import numpy as np
 
-def checkRange(grid, p, q):
+def checkRange(gridNum,grid, p, q):
     try:
-        grid[q][p + 1] += 100
+        if(p != -1):
+            if(q != -1):
+                grid[q][p] += 100
     except Exception:
         pass
 
 def setBoard(gridNum, mineNum):
-    grid = [[-1] * gridNum for i in range(gridNum)]
+    grid = np.full((gridNum, gridNum), 0)
     count = 0
-    while(count <= mineNum):
+    while(count < mineNum):
         p = random.randint(0, gridNum - 1)
         q = random.randint(0, gridNum - 1)
         if(grid[q][p] > -2):
-
+            print(p, q)
             grid[q][p] += -10000
 
-            checkRange(grid, p-1, q-1)
-            checkRange(grid, p-1, q)
-            checkRange(grid, p-1, q+1)
-            checkRange(grid, p, q-1)
-            checkRange(grid, p, q+1)
-            checkRange(grid, p+1, q)
-            checkRange(grid, p+1, q+1)
-            checkRange(grid, p+1, q)
+            checkRange(gridNum, grid, p-1, q-1)
+            checkRange(gridNum, grid, p-1, q)
+            checkRange(gridNum, grid, p-1, q+1)
+            checkRange(gridNum, grid, p, q-1)
+            checkRange(gridNum, grid, p, q+1)
+            checkRange(gridNum, grid, p+1, q-1)
+            checkRange(gridNum, grid, p+1, q)
+            checkRange(gridNum, grid, p+1, q+1)
 
             count += 1
 
             print(grid)
+            print("\n\n")
 # def printBoard(gridnum):
 
 if __name__ == "__main__":
