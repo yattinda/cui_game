@@ -33,6 +33,7 @@ def setBoard(gridNum, mineNum):
     # print(grid)
 
 def printBoard(gridnum, grid):
+    print("\n")
     print(" ", end = "  ")
     for i in range(1, gridnum + 1):
         print(i, end = "   ")
