@@ -45,7 +45,7 @@ def printBoard(gridnum, grid):
         for k in range(gridnum):
             if(grid[j][k] < -100):
                 #最終的に■に
-                print(" ★ ", end = " ")
+                print(" ☠ ", end = " ")
             elif(int(str(grid[j][k])[-1]) == 0):
                 print(" ■ ", end = " ")
             else:
