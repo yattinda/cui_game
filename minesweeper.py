@@ -72,7 +72,9 @@ def checkClear(grid, gridNum, mineNum):
         return -500
 
 def open(p, q, gridNum, grid, count = 0):
-    if(p < 0 or p > gridNum - 1 or q < 0 or q > gridNum - 1):
+    if(p == 999 and q == 999):
+        return None
+    elif(p < 0 or p > gridNum - 1 or q < 0 or q > gridNum - 1):
         return None
     elif(int(str(grid[p][q])[-1]) != 0):
         return None
@@ -96,11 +98,13 @@ def judge(p, q, grid):
     return 999
 
 def mainGame():
+    print("\n")
     print("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-")
     print("   Hello this is MineSweeper")
     print("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-")
+    print("\n")
     while True:
-        level = int(input("Please enter the level at number\n1: EASY\n2: NOMAL\n3: HARD\n"))
+        level = int(input("Please enter the level at numbers!\n1: EASY\n2: NOMAL\n3: HARD\n"))
         if(level == 1):
             gridNum = 9
             mineNum = 10
@@ -118,21 +122,60 @@ def mainGame():
 
     setBoard(gridNum, mineNum)
     printBoard(gridNum, grid, 999)
-
+    pinList = []
     while True:
-        a, b = (int(x) for x in input("Plz enter number! \nFirst, enter the numbers on the side, such as 1 2\n\n" ).split())
-        open(a, b, gridNum, grid)
-        if(judge(a, b, grid) == 666):
-            print("Game over!")
-            printBoard(gridNum, grid, 666)
-            break
-        elif(checkClear(grid, gridNum, mineNum) == 500):
-            print("Game clear!")
-            printBoard(gridNum, grid, 999)
-            break
-        else:
-            printBoard(gridNum, grid, 999)
+        print("This is your PIN")
+        for i in pinList:
+            print(i, end = "  ")
+        print("\n")
+        while True:
+            try:
+                a, b = (int(x) for x in input("Plz enter number! \nFirst, enter the numbers on the side, such as 1 2\n\nIf u want to use PIN, plz enter 999 999\n\nIf U want to exit, plz enter -666 -666\n").split())
+                break
+            except:
+                print("\n")
+                print("$$$$$$$$$$$$$$$$$$$$$$$$")
+                print("Plz enter correct number")
+                print("$$$$$$$$$$$$$$$$$$$$$$$$")
+                print("\n")
+                continue
+
+        if(a == 999 and b == 999):
+            while  True:
+                print("\n")
+                print("#############################")
+                print("          PIN mode           ")
+                print("#############################")
+                print("\n")
+                a, b = (int(x) for x in input("Plz enter PIN number! \nFirst, enter the numbers on the side, such as 1 2\n\nIf u NOT want to use PIN, plz enter 999 999\nIf you delete PIN, U enter same PIN\n").split())
+                if(a == 999 and b == 999):
+                    printBoard(gridNum, grid, 999)
+                    break
+                else:
+                    if([a, b] in pinList):
+                        pinList.remove([a, b])
+                    else:
+                        pinList.append([a, b])
+                        continue
+        elif(a == -666 and b == -666):
+            exit()
+
+        if(a < 1 or a > 9 or b < 1 or b > 9):
+            print("Plz enter correct number")
             continue
+        else:
+            open(a, b, gridNum, grid)
+            if(judge(a, b, grid) == 666):
+                print("Game over!")
+                printBoard(gridNum, grid, 666)
+                break
+            elif(checkClear(grid, gridNum, mineNum) == 500):
+                print("Game clear!")
+                printBoard(gridNum, grid, 999)
+                break
+            else:
+                printBoard(gridNum, grid, 999)
+                continue
 
 
 # def test():
