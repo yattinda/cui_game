@@ -56,9 +56,9 @@ def printBoard(gridnum, grid):
         print("\n")
     print("\n")
 
-def test():
-    setBoard(9, 9)
-    printBoard(9, grid)
+# def test():
+#     setBoard(9, 9)
+#     printBoard(9, grid)
 
 if __name__ == "__main__":
     test()
