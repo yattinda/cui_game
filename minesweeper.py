@@ -62,11 +62,16 @@ def printBoard(gridNum, grid, status):
 def checkClear(grid, gridNum, mineNum):
     count = 0
     for i in range(gridNum):
-        for k in range(gridNum):
-            if(grid[i][k] == -666):
+        for j in range(gridNum):
+            if(int(str(grid[i][j])[-1]) == 0):
+                count += 0
+            elif(10 > grid[i][j] and grid[i][j] > 0):
                 count += 1
-
-    if(count == mineNum):
+            elif(int(str(grid[i][j])[-3]) > 0):
+                count += 1
+                print("UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU")
+                print("{},{}".format(count, gridNum^2 - mineNum))
+    if(count == gridNum^2 - mineNum):
         return 500
     else:
         return -500
@@ -177,7 +182,7 @@ def mainGame():
             continue
         else:
             open(a-1, b-1, gridNum, grid, gridOpen)
-            if(judge(a, b, grid) == 666):
+            if(judge(a-1, b-1, grid) == 666):
                 print("Game over!")
                 printBoard(gridNum, grid, 666)
                 break
