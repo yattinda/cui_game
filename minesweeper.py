@@ -56,6 +56,19 @@ def printBoard(gridnum, grid):
         print("\n")
     print("\n")
 
+def checkClear(grid, gridNum, mineNum):
+    count = 0
+    for i in range(gridNum):
+        for k in range(gridNum):
+            if(grid[i][k] == -666):
+                count += 1
+
+    if(count == mineNum):
+        return 500
+    else:
+        return -500
+
+
 # def test():
 #     setBoard(9, 9)
 #     printBoard(9, grid)
