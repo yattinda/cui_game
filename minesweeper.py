@@ -1,6 +1,7 @@
 import random
 import numpy as np
 
+#-1で飛ぶことを防ぐ
 def checkRange(gridNum,grid, p, q):
     try:
         if(p != -1):
@@ -67,6 +68,21 @@ def checkClear(grid, gridNum, mineNum):
         return 500
     else:
         return -500
+
+def open(p, q, gridnum, grid):
+    if(p < 1 or p > gridNum or q < 1 or q > gridNum):
+        return None
+    else if(int(str(grid[p][q])[-1]) != 0):
+        return None
+    else:
+        open(p-1, q-1, gridNum, grid)
+        open(p-1, q, gridNum, grid)
+        open(p-1, q+1, gridNum, grid)
+        open(p, q-1, gridNum, grid)
+        open(p, q+1, gridNum, grid)
+        open(p+1, q-1, gridNum, grid)
+        open(p+1, q, gridNum, grid)
+        open(p+1, q+1, gridNum, grid)
 
 
 # def test():
