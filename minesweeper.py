@@ -71,21 +71,24 @@ def checkClear(grid, gridNum, mineNum):
     else:
         return -500
 
-def open(p, q, gridNum, grid):
+def open(p, q, gridNum, grid, count = 0):
     if(p < 0 or p > gridNum - 1 or q < 0 or q > gridNum - 1):
         return None
     elif(int(str(grid[p][q])[-1]) != 0):
         return None
+    elif(int(str(grid[p][q]/100)[-1]) > 0 or count == 3):
+        grid[p][q] += 1
     else:
         grid[p][q] += 1
-        open(p-1, q-1, gridNum, grid)
-        open(p-1, q, gridNum, grid)
-        open(p-1, q+1, gridNum, grid)
-        open(p, q-1, gridNum, grid)
-        open(p, q+1, gridNum, grid)
-        open(p+1, q-1, gridNum, grid)
-        open(p+1, q, gridNum, grid)
-        open(p+1, q+1, gridNum, grid)
+        count += 1
+        open(p-1, q-1, gridNum, grid, count)
+        open(p-1, q, gridNum, grid, count)
+        open(p-1, q+1, gridNum, grid, count)
+        open(p, q-1, gridNum, grid, count)
+        open(p, q+1, gridNum, grid, count)
+        open(p+1, q-1, gridNum, grid, count)
+        open(p+1, q, gridNum, grid, count)
+        open(p+1, q+1, gridNum, grid, count)
 
 def judge(p, q, grid):
     if(grid[p][q] < 0 and int(str(grid[p][q])[-1]) != 0):
