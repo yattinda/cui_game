@@ -71,26 +71,26 @@ def checkClear(grid, gridNum, mineNum):
     else:
         return -500
 
-def open(p, q, gridNum, grid, count = 0):
+def open(p, q, gridNum, grid, gridOpen, count = 0):
     if(p == 999 and q == 999):
         return None
     elif(p < 0 or p > gridNum - 1 or q < 0 or q > gridNum - 1):
         return None
     elif(int(str(grid[p][q])[-1]) != 0):
         return None
-    elif(int(str(grid[p][q]/100)[-1]) > 0 or count == 3):
+    elif(int(str(grid[p][q]/100)[-1]) > 0 or count == gridOpen):
         grid[p][q] += 1
     else:
         grid[p][q] += 1
         count += 1
-        open(p-1, q-1, gridNum, grid, count)
-        open(p-1, q, gridNum, grid, count)
-        open(p-1, q+1, gridNum, grid, count)
-        open(p, q-1, gridNum, grid, count)
-        open(p, q+1, gridNum, grid, count)
-        open(p+1, q-1, gridNum, grid, count)
-        open(p+1, q, gridNum, grid, count)
-        open(p+1, q+1, gridNum, grid, count)
+        open(p-1, q-1, gridNum, grid, gridOpen, count)
+        open(p-1, q, gridNum, grid, gridOpen, count)
+        open(p-1, q+1, gridNum, grid, gridOpen, count)
+        open(p, q-1, gridNum, grid, gridOpen, count)
+        open(p, q+1, gridNum, grid, gridOpen, count)
+        open(p+1, q-1, gridNum, grid, gridOpen, count)
+        open(p+1, q, gridNum, grid, gridOpen, count)
+        open(p+1, q+1, gridNum, grid, gridOpen, count)
 
 def judge(p, q, grid):
     if(grid[p][q] < 0 and int(str(grid[p][q])[-1]) != 0):
@@ -108,14 +108,17 @@ def mainGame():
         if(level == 1):
             gridNum = 9
             mineNum = 10
+            gridOpen = 2
             break
         elif(level == 2):
             gridNum = 16
             mineNum = 40
+            gridOpen = 4
             break
         elif(level == 3):
             gridNum = 20
             mineNum = 100
+            gridOpen = 6
             break
         else:
             print("Please enter 1 or 2 or 3")
@@ -139,7 +142,7 @@ def mainGame():
                 print("$$$$$$$$$$$$$$$$$$$$$$$$")
                 print("\n")
                 continue
-
+        # PIN mode
         if(a == 999 and b == 999):
             while  True:
                 print("\n")
@@ -147,16 +150,25 @@ def mainGame():
                 print("          PIN mode           ")
                 print("#############################")
                 print("\n")
-                a, b = (int(x) for x in input("Plz enter PIN number! \nFirst, enter the numbers on the side, such as 1 2\n\nIf u NOT want to use PIN, plz enter 999 999\nIf you delete PIN, U enter same PIN\n").split())
-                if(a == 999 and b == 999):
-                    printBoard(gridNum, grid, 999)
-                    break
-                else:
-                    if([a, b] in pinList):
-                        pinList.remove([a, b])
+                try:
+                    a, b = (int(x) for x in input("Plz enter PIN number! \nFirst, enter the numbers on the side, such as 1 2\n\nIf u NOT want to use PIN, plz enter 999 999\nIf you delete PIN, U enter same PIN\n").split())
+                    if(a == 999 and b == 999):
+                        printBoard(gridNum, grid, 999)
+                        break
                     else:
-                        pinList.append([a, b])
-                        continue
+                        if([a, b] in pinList):
+                            pinList.remove([a, b])
+                        else:
+                            pinList.append([a, b])
+                            continue
+                except:
+                    print("\n")
+                    print("$$$$$$$$$$$$$$$$$$$$$$$$")
+                    print("Plz enter correct number")
+                    print("$$$$$$$$$$$$$$$$$$$$$$$$")
+                    print("\n")
+                    continue
+        #exit
         elif(a == -666 and b == -666):
             exit()
 
@@ -164,7 +176,7 @@ def mainGame():
             print("Plz enter correct number")
             continue
         else:
-            open(a, b, gridNum, grid)
+            open(a-1, b-1, gridNum, grid, gridOpen)
             if(judge(a, b, grid) == 666):
                 print("Game over!")
                 printBoard(gridNum, grid, 666)
