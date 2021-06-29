@@ -31,8 +31,6 @@ def setBoard(gridNum, mineNum):
 
             count += 1
 
-    # print(grid)
-
 def printBoard(gridNum, grid, status):
     print("\n")
     print(" ", end = "  ")
@@ -52,29 +50,28 @@ def printBoard(gridNum, grid, status):
             elif(int(str(grid[j][k])[-1]) == 0):
                 print(" ■ ", end = " ")
             else:
-                if(10 > grid[j][k] and grid[j][k] > 0):
+                if(grid[j][k] and grid[j][k] == 1):
                     print(" ・", end = " ")
                 elif(int(str(grid[j][k])[-3]) > 0):
                     print(" " + str(grid[j][k])[-3] + " ", end  = " ")
         print("\n")
     print("\n")
+    #debug
+    print(grid)
 
 def checkClear(grid, gridNum, mineNum):
     count = 0
     for i in range(gridNum):
         for j in range(gridNum):
-            if(int(str(grid[i][j])[-1]) == 0):
-                count += 0
-            elif(10 > grid[i][j] and grid[i][j] > 0):
+            if(int(str(grid[i][j])[-1]) == 1):
                 count += 1
-            elif(int(str(grid[i][j])[-3]) > 0):
-                count += 1
-                print("UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU")
-                print("{},{}".format(count, gridNum^2 - mineNum))
-    if(count == gridNum^2 - mineNum):
-        return 500
+    print(count)
+    print(gridNum * gridNum - mineNum)
+    if(count == gridNum * gridNum - mineNum):
+        return 555
     else:
-        return -500
+        return -555
+
 
 def open(p, q, gridNum, grid, gridOpen, count = 0):
     if(p == 999 and q == 999):
@@ -186,9 +183,9 @@ def mainGame():
                 print("Game over!")
                 printBoard(gridNum, grid, 666)
                 break
-            elif(checkClear(grid, gridNum, mineNum) == 500):
+            elif(checkClear(grid, gridNum, mineNum) == 555):
                 print("Game clear!")
-                printBoard(gridNum, grid, 999)
+                printBoard(gridNum, grid, 666)
                 break
             else:
                 printBoard(gridNum, grid, 999)
