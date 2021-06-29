@@ -57,7 +57,7 @@ def printBoard(gridNum, grid, status):
         print("\n")
     print("\n")
     #debug
-    print(grid)
+    #print(grid)
 
 def checkClear(grid, gridNum, mineNum):
     count = 0
@@ -65,8 +65,6 @@ def checkClear(grid, gridNum, mineNum):
         for j in range(gridNum):
             if(int(str(grid[i][j])[-1]) == 1):
                 count += 1
-    print(count)
-    print(gridNum * gridNum - mineNum)
     if(count == gridNum * gridNum - mineNum):
         return 555
     else:
@@ -180,11 +178,20 @@ def mainGame():
         else:
             open(a-1, b-1, gridNum, grid, gridOpen)
             if(judge(a-1, b-1, grid) == 666):
-                print("Game over!")
+                print("\n")
+                print("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■")
+                print("■    Opps!!                   ■")
+                print("■            Game over!       ■")
+                print("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■")
+                print("\n")
                 printBoard(gridNum, grid, 666)
                 break
             elif(checkClear(grid, gridNum, mineNum) == 555):
-                print("Game clear!")
+                print("\n")
+                print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+                print("☆★☆  Congratulations!!          ☆★☆")
+                print("☆★☆             Game clear!!    ☆★☆")
+                print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
                 printBoard(gridNum, grid, 666)
                 break
             else:
